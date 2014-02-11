@@ -29,3 +29,7 @@ if ($city_form.length > 0) {
 }  
 ```
 
+### Todo
+- Fix support for textfields
+- Fix support for textareas
+- Fix support for submits
