@@ -1,6 +1,8 @@
 (function($) {
   
   $.ojjeform = function(forms, options) {  
+    
+    forms = forms.filter(':not(".ojjeform")');
           
     /* Set our default settings */
     var defaults = {
@@ -35,12 +37,16 @@
   
       formItems.each(function(i, o) {
         var item = $(o);
-        var parent = item.parent();
         var tagType = o.tagName.toLowerCase();
-
+        
         if (tagType == 'select') {
+          item.addClass('form-select');
+          item.wrap('<div class="form-type-select"></div>');
+          var parent = item.parent();
           itemType = 'ojjeform-select';
-          var label = parent.find('label');
+          var name = item.prop('name');
+          var label = form.find('label[for="' + name + '"]');
+          label.prependTo(parent);
           var selectLink = '<div class="ojjeform-select-chosen"><a href="#" class="ojjeform-select-chosen-link"></a></div>';
           parent.append(selectLink);
           var listClass = itemType + '-list';
@@ -69,9 +75,14 @@
             selectList.removeClass('open');
           });
         } else if (tagType == 'input') {
-          var itemType = 'ojjeform-' + $(o).attr('type');
-          var label = parent.find('label');
-          var link = '<a href="#" class="' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + label.text() + '</span></a>';
+          var itemType = $(o).prop('type');
+          item.addClass('form-' + itemType); 
+          item.wrap('<div class="form-type-' + itemType + '"></div>');
+          var parent = item.parent();    
+          var name = item.prop('name');
+          var label = form.find('label[for="' + name + '"]');
+          label.prependTo(parent);          
+          var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + label.text() + '</span></a>';
           parent.append(link);
         }
       });

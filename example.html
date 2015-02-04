@@ -25,9 +25,7 @@
 	        types: {
 	          checkbox: true,
 	          radio: true,
-	          select: true,
-	          textfield: false,
-	          textarea: false
+	          select: true
 	        }
 	      };
 	      $.ojjeform($questions_form, formOptions);
@@ -50,20 +48,14 @@
 
 				<div class="form-checkboxes">
 
-					<div class="form-type-checkbox">
-						<input type="checkbox" name="hawaii" class="form-checkbox" value="hawaii">
-						<label for="hawaii">Hawaii</label>
-					</div>
-
-					<div class="form-type-checkbox">
-						<input type="checkbox" name="vienna" class="form-checkbox" value="vienna">
-						<label for="vienna">Vienna</label>
-					</div>
-
-					<div class="form-type-checkbox active">
-						<input type="checkbox" name="moscow" class="form-checkbox" value="moscow">
-						<label for="moscow">Moscow</label>
-					</div>
+					<input type="checkbox" name="hawaii" value="hawaii">
+					<label for="hawaii">Hawaii</label>
+			
+					<input type="checkbox" name="vienna" value="vienna">
+					<label for="vienna">Vienna</label>
+          
+					<input type="checkbox" name="moscow"value="moscow">
+					<label for="moscow">Moscow</label>
 
 				</div>
 
@@ -77,21 +69,15 @@
 
 				<div class="form-radios">
 
-					<div class="form-type-radio">
-						<input type="radio" name="hawaii" class="form-radio" value="hawaii">
-						<label for="hawaii">Hawaii</label>
-					</div>
+					<input type="radio" name="hawaii"value="hawaii">
+					<label for="hawaii">Hawaii</label>
 
-					<div class="form-type-radio">
-						<input type="radio" name="vienna" class="form-radio" value="vienna">
-						<label for="vienna">Vienna</label>
-					</div>
+					<input type="radio" name="vienna"  value="vienna">
+					<label for="vienna">Vienna</label>
 
-					<div class="form-type-radio active">
-						<input type="radio" name="moscow" class="form-radio" value="moscow">
-						<label for="moscow">Moscow</label>
-					</div>
-
+					<input type="radio" name="moscow" value="moscow">
+					<label for="moscow">Moscow</label>
+          
 				</div>
 
 			</div>
@@ -103,15 +89,13 @@
 			<div class="form-components">
 
 				<div class="form-select">
-
-					<div class="form-type-select">
-						<select class="form-select">
+            <label for="teams">Team</label>
+						<select class="teams" name="teams">
 							<option value="manchester_united">Manchester United</option>
 							<option value="milan">Milan</option>
 							<option value="barcelona">Barcelona</option>
 							<option value="dortmund">Dortmund</option>
 						</select>
-					</div>
 
 				</div>
 
@@ -119,20 +103,6 @@
 
 		</div>
 		
-		<div class="form-row third">
-			<div class="form-text">
-  			<label for="name">Name</label><br />
-  			<input type="text" class="form-text" name="name" />
-  		</div>
-		</div>
-		
-		<div class="form-row fourth">
-			<div class="form-text">
-  			<label for="message">Message</label><br />
-  			<textarea class="form-textarea" name="message"></textarea>
-  		</div>
-		</div>
-
 		<div class="btn-wrapper">
 		  <input class="btn btn-next" type="button" value="Nästa val" style="display: none;">
 			<input class="btn btn-done" type="submit" value="Ok!" style="display: inline-block;">
