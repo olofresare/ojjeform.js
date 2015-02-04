@@ -9,8 +9,7 @@
     	types: {
         checkbox: false,
         radio: false,
-        select: false,
-        submit: false
+        select: false
     	}
     };
 
@@ -19,7 +18,7 @@
 
     forms.each(function(e, v) {
       var form = $(v);
-      var formItems = form.find('input[type=checkbox], input[type=radio], input[type=submit], select');
+      var formItems = form.find('input[type=checkbox], input[type=radio], select');
       form.addClass('ojjeform');
 
       if (settings.types.checkbox == false) {
@@ -27,9 +26,6 @@
       }
       if (settings.types.radio == false) {
         formItems = formItems.not('[type=radio]');
-      }
-      if (settings.types.submit == false) {
-        formItems = formItems.not('[type=submit]');
       }
       if (settings.types.select == false) {
         formItems = formItems.not('select');
