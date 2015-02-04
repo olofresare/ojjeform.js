@@ -86,7 +86,7 @@
           }
 
           $label.prependTo($parent);          
-          var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.text() + '</span></a>';
+          var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></a>';
           $parent.append(link);
         }
       });
@@ -95,7 +95,7 @@
     $forms.on('click', 'a.ojjeform-checkbox', function() {
       var $link = $(this);
       var $parent = $link.parent();
-      var $checkbox = parent.find('input.form-checkbox');
+      var $checkbox = $parent.find('input.form-checkbox');
       if ($checkbox.is(':disabled') == false) {
         if ($parent.hasClass('active') == false) {
           $parent.addClass('active');
@@ -107,42 +107,26 @@
       }
       return false;
     });
-
-    $forms.on('click', '.form-radios label', function(e) {
-      e.preventDefault();
-      var $label = $(this);
-      var target = $label.prop('for');
-      var $parent = $label.closest('.form-type-radio');
-      var $target = $parent.find('input[id="' + target + '"]');
-      if ($target.length == 0) {
-        $target = $parent.find('input[name="' + target + '"]');
-      }
-
-      if ($target.is(':checked')) {
-        $target.prop('checked', false);
-        $target.trigger('change');
-      } else {
-        $target.prop('checked', true);
-        $target.trigger('change');
-      }
-    });
-
-    $forms.on('change', '.form-radios input[type="radio"]', function() {
-      var $radio = $(this);
-      var $grandParent = $radio.closest('.form-radios');
-
-      $.each($grandParent.find('input[type="radio"]'), function(k, v) {
-        var $v = $(v);
-        var $parent = $v.closest('.form-type-radio');
-
-        if ($v.is(':checked')) {
-          $parent.addClass('active');
+    
+    $forms.on('click', 'a.ojjeform-radio', function() {
+      var $link = $(this);
+      var $parent = $link.parent();
+      var $radio = $parent.find('input.form-radio');
+      if ($radio.is(':disabled') == false) {    
+        if ($parent.hasClass('active') == false) {
+          var $radios = $link.parents('.form-radios');
+          $radios.find('.form-type-radio').removeClass('active');
+          $radios.find("input:radio").prop("checked", false);
+          $parent.addClass('active');   
+          $parent.find('input.form-radio').prop("checked", true).trigger("change");    
         } else {
+          $parent.find('input.form-radio').prop("checked", false);
           $parent.removeClass('active');
         }
-      });
+      }
+      return false;
     });
-
+    
     $forms.on('click', 'a.ojjeform-select', function() {
       var $link = $(this);
       var $parentLi = $link.parent();
@@ -162,7 +146,7 @@
           $selectedLink.text($link.text());
           $selectList.slideUp(200, function() {
             $selectList.removeClass('open');
-            var o$ptionToChoose = $select.find('option[value="' + chosenVal + '"]');
+            var $optionToChoose = $select.find('option[value="' + chosenVal + '"]');
             $optionToChoose.prop('selected', true).trigger('change');
           });
         }
