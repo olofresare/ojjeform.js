@@ -84,7 +84,11 @@
             var name = $item.prop('name');
             var $label = $form.find('label[for="' + name + '"]');
           }
-
+          
+          if ((itemType == 'radio' || itemType == 'checkbox') && $item.is(':checked')) {
+            $parent.addClass('active');
+          }
+          
           $label.prependTo($parent);          
           var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></a>';
           $parent.append(link);
