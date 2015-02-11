@@ -96,7 +96,8 @@
       });
     });
     
-    $forms.on('click', 'a.ojjeform-checkbox', function() {
+    $forms.on('click', 'a.ojjeform-checkbox', function(e) {
+      e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
       var $checkbox = $parent.find('input.form-checkbox');
@@ -109,10 +110,10 @@
           $checkbox.prop("checked", false).trigger('change');
         }
       }
-      return false;
     });
     
-    $forms.on('click', 'a.ojjeform-radio', function() {
+    $forms.on('click', 'a.ojjeform-radio', function(e) {
+      e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
       var $radio = $parent.find('input.form-radio');
@@ -128,10 +129,10 @@
           $parent.removeClass('active');
         }
       }
-      return false;
     });
     
-    $forms.on('click', 'a.ojjeform-select', function() {
+    $forms.on('click', 'a.ojjeform-select', function(e) {
+      e.preventDefault();
       var $link = $(this);
       var $parentLi = $link.parent();
       var $parentUl = $parentLi.parent();
@@ -155,10 +156,10 @@
           });
         }
       }
-      return false;
     });
 
-    $forms.on('click', 'a.ojjeform-select-chosen-link', function() {
+    $forms.on('click', 'a.ojjeform-select-chosen-link', function(e) {
+      e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
       var $wrapper = $parent.parent();
@@ -188,7 +189,6 @@
           });
         }
       }
-      return false;
     });
 
     $forms.on('reset', function() {
