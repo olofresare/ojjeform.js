@@ -125,7 +125,7 @@
           $parent.addClass('active');   
           $parent.find('input.form-radio').prop("checked", true).trigger("change");    
         } else {
-          $parent.find('input.form-radio').prop("checked", false);
+          $parent.find('input.form-radio').prop("checked", false).trigger("change"); 
           $parent.removeClass('active');
         }
       }
