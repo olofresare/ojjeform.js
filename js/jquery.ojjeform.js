@@ -2,7 +2,7 @@
   "use strict";
   
   $.ojjeform = function($forms, options) {  
-    
+
     $forms = $forms.filter(':not(".ojjeform")');
           
     /* Set our default settings */
@@ -10,7 +10,8 @@
     	types: {
         checkbox: false,
         radio: false,
-        select: false
+        select: false,
+        textfield: false
     	}
     };
 
@@ -19,9 +20,15 @@
 
     $forms.each(function(e, v) {
       var $form = $(v);
-      var $formItems = $form.find('input[type=checkbox], input[type=radio], select');
+      var $formItems = $form.find('input[type=text], input[type=tel], input[type=checkbox], input[type=radio], select');
       $form.addClass('ojjeform');
-
+      
+      if (settings.types.textfield == false) {
+        $formItems = $formItems.not('[type=text]');
+      }
+      if (settings.types.textfield == false) {
+        $formItems = $formItems.not('[type=tel]');
+      }
       if (settings.types.checkbox == false) {
         $formItems = $formItems.not('[type=checkbox]');
       }
@@ -73,6 +80,7 @@
           });
         } else if (tagType == 'input') {
           var itemType = $(o).prop('type');
+          itemType = (itemType == 'tel') ? 'text' : itemType;
           $item.addClass('form-' + itemType); 
           $item.wrap('<div class="form-type-' + itemType + '"></div>');
           var $parent = $item.parent();    
@@ -89,9 +97,12 @@
             $parent.addClass('active');
           }
           
-          $label.prependTo($parent);          
-          var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></a>';
-          $parent.append(link);
+          $label.prependTo($parent);  
+          
+          if (itemType == 'radio' || itemType == 'checkbox') {        
+            var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></a>';
+            $parent.append(link);
+          }
         }
       });
     });
@@ -117,6 +128,7 @@
       var $link = $(this);
       var $parent = $link.parent();
       var $radio = $parent.find('input.form-radio');
+      
       if ($radio.is(':disabled') == false) {    
         if ($parent.hasClass('active') == false) {
           var $radios = $link.parents('.form-radios');
@@ -125,7 +137,7 @@
           $parent.addClass('active');   
           $parent.find('input.form-radio').prop("checked", true).trigger("change");    
         } else {
-          $parent.find('input.form-radio').prop("checked", false).trigger("change"); 
+          $parent.find('input.form-radio').prop("checked", false).trigger("change");
           $parent.removeClass('active');
         }
       }
