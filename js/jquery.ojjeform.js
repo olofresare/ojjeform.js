@@ -100,7 +100,7 @@
           $label.prependTo($parent);  
           
           if (itemType == 'radio' || itemType == 'checkbox') {        
-            var link = '<a href="#" class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></a>';
+            var link = '<div class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></div>';
             $parent.append(link);
           }
         }

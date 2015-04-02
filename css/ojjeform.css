@@ -138,6 +138,7 @@ a.ojjeform-select-chosen-link{
         -webkit-border-radius: 4px;
         border-radius: 4px;
         position: relative;
+        cursor: pointer;
     }
     
     .ojjeform .form-type-checkbox .ojjeform-checkbox .icon:after{
@@ -172,6 +173,7 @@ a.ojjeform-select-chosen-link{
         margin-top: 0px;
         margin-left: 5px;
         color: #000;
+        cursor: pointer;
     }
 
     .ojjeform .form-type-radio .ojjeform-radio .icon-marker{
@@ -192,6 +194,7 @@ a.ojjeform-select-chosen-link{
       color: #000;
       text-align: left;
       line-height: 22px;
+      cursor: pointer;
     }
     
     .ojjeform .form-type-radio.active .ojjeform-radio .text{
