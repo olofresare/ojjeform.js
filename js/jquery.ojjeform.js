@@ -107,23 +107,27 @@
       });
     });
     
-    $forms.on('click', 'a.ojjeform-checkbox', function(e) {
-      e.preventDefault();
+    $forms.on('click', '.ojjeform-checkbox', function(e) {
       var $link = $(this);
-      var $parent = $link.parent();
-      var $checkbox = $parent.find('input.form-checkbox');
-      if ($checkbox.is(':disabled') == false) {
-        if ($parent.hasClass('active') == false) {
-          $parent.addClass('active');
-          $checkbox.prop("checked", true).trigger('change');
-        } else {
-          $parent.removeClass('active');
-          $checkbox.prop("checked", false).trigger('change');
+      var $target = $(e.target);
+      
+      if ($target.hasClass('terms-link') == false) {
+        e.preventDefault();
+        var $parent = $link.parent();
+        var $checkbox = $parent.find('input.form-checkbox');
+        if ($checkbox.is(':disabled') == false) {
+          if ($parent.hasClass('active') == false) {
+            $parent.addClass('active');
+            $checkbox.prop("checked", true).trigger('change');
+          } else {
+            $parent.removeClass('active');
+            $checkbox.prop("checked", false).trigger('change');
+          }
         }
       }
     });
     
-    $forms.on('click', 'a.ojjeform-radio', function(e) {
+    $forms.on('click', '.ojjeform-radio', function(e) {
       e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
