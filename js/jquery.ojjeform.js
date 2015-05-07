@@ -167,6 +167,7 @@
           $selectedLink.text($link.text());
           $selectList.slideUp(200, function() {
             $selectList.removeClass('open');
+            $selectedLink.removeClass('open');
             var $optionToChoose = $select.find('option[value="' + chosenVal + '"]');
             $optionToChoose.prop('selected', true).trigger('change');
           });
