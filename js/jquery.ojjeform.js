@@ -45,6 +45,9 @@
         
         if (tagType == 'select') {
           $item.addClass('form-select');
+          if ($item.closest('.form-select-wrapper').length > 0) {
+            return;
+          }
           $item.wrap('<div class="form-type-select"></div>');
           var $parent = $item.parent();
           var name = $item.prop('name');
@@ -107,7 +110,7 @@
       });
     });
     
-    $forms.on('click', '.ojjeform-checkbox', function(e) {
+    $forms.off('click', '.ojjeform-checkbox').on('click', '.ojjeform-checkbox', function(e) {
       var $link = $(this);
       var $target = $(e.target);
       
@@ -127,7 +130,7 @@
       }
     });
     
-    $forms.on('click', '.ojjeform-radio', function(e) {
+    $forms.off('click', '.ojjeform-radio').on('click', '.ojjeform-radio', function(e) {
       e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
@@ -147,7 +150,7 @@
       }
     });
     
-    $forms.on('click', 'a.ojjeform-select', function(e) {
+    $forms.off('click', 'a.ojjeform-select').on('click', 'a.ojjeform-select', function(e) {
       e.preventDefault();
       var $link = $(this);
       var $parentLi = $link.parent();
@@ -175,7 +178,7 @@
       }
     });
 
-    $forms.on('click', 'a.ojjeform-select-chosen-link', function(e) {
+    $forms.off('click', 'a.ojjeform-select-chosen-link').on('click', 'a.ojjeform-select-chosen-link', function(e) {
       e.preventDefault();
       var $link = $(this);
       var $parent = $link.parent();
@@ -208,7 +211,7 @@
       }
     });
 
-    $forms.on('reset', function() {
+    $forms.off('reset').on('reset', function() {
       var $form = $(this);
       $form.find('.active').removeClass('active');
     });

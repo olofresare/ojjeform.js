@@ -19,6 +19,7 @@
     display: block;
     height: 19px;
     line-height: 19px;
+    outline: none;
 }
 
 .form-type-select .ojjeform-select-chosen{
