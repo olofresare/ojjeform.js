@@ -2,7 +2,9 @@
   "use strict";
   
   $.ojjeform = function($forms, options) {  
-
+    
+    var $document = $(document);
+    
     $forms = $forms.filter(':not(".ojjeform")');
           
     /* Set our default settings */
@@ -214,6 +216,20 @@
     $forms.off('reset').on('reset', function() {
       var $form = $(this);
       $form.find('.active').removeClass('active');
+    });
+    
+    $document.off('click').on('click', function() {
+      $('.form-type-select').each(function(k, v) {
+        var $wrapper = $(v);
+        var $selectList = $wrapper.find('ul.ojjeform-select-list');
+        var $link = $wrapper.find('.ojjeform-select-chosen .ojjeform-select-chosen-link');
+        if ($selectList.hasClass('open')) {
+          $selectList.slideUp(200, function() {
+            $selectList.removeClass('open');
+            $link.removeClass('open');
+          });
+        }
+      });
     });
     
   };
