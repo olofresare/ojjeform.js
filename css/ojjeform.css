@@ -56,6 +56,10 @@ a.ojjeform-select-chosen-link{
     border-left: 1px solid #e5e5e5;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 }
 
 .ojjeform-select-chosen-link:after{
@@ -141,6 +145,7 @@ a.ojjeform-select-chosen-link{
         border-radius: 4px;
         position: relative;
         cursor: pointer;
+				pointer-events: none;
     }
     
     .ojjeform .form-type-checkbox .ojjeform-checkbox .icon:after{
@@ -185,6 +190,7 @@ a.ojjeform-select-chosen-link{
         width: 17px;
         height: 17px;
         z-index: 5000;
+				pointer-events: none;
     }
 
     .ojjeform .form-type-radio .ojjeform-radio .text{
