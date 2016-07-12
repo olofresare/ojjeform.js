@@ -81,7 +81,8 @@
 					if ($item.closest('.form-select-wrapper').length > 0) {
 						return;
 					}
-					$item.wrap('<div class="form-type-select"></div>');
+					
+					$item.wrap('<div class="form-type-select cf"></div>');
 					var $parent = $item.parent();
 					var name = $item.prop('name');
 					var $label = $form.find('label[for="' + name + '"]');
@@ -114,17 +115,19 @@
 					$selectList.slideUp(0, function() {
 						$selectList.removeClass('open');
 					});
-				} else if (tagType == 'input') {
+				}
+				else if (tagType == 'input') {
 					var itemType = $(o).prop('type');
 					itemType = (itemType == 'tel') ? 'text' : itemType;
 					$item.addClass('form-' + itemType); 
 					$item.wrap('<div class="form-type-' + itemType + '"></div>');
 					var $parent = $item.parent();
-					
 					var id = $item.prop('id');
+					
 					if (typeof id !== typeof undefined && id !== false && id.length > 0) {
 						var $label = $form.find('label[for="' + id + '"]');
-					} else {
+					}
+					else {
 						var name = $item.prop('name');
 						var $label = $form.find('label[for="' + name + '"]');
 					}
@@ -136,7 +139,7 @@
 					$label.prependTo($parent);
 					
 					if (itemType == 'radio' || itemType == 'checkbox') {
-						var link = '<div class="ojjeform-' + itemType + '"><span class="icon-marker"></span><span class="icon"></span><span class="text">' + $label.html() + '</span></div>';
+						var link = '<div class="ojjeform-' + itemType + '"><span class="icon"></span><span class="text">' + $label.html() + '</span></div>';
 						$parent.append(link);
 					}
 				}
@@ -149,13 +152,15 @@
 			
 			if ($target.hasClass('terms-link') == false) {
 				e.preventDefault();
+				
 				var $parent = $link.parent();
 				var $checkbox = $parent.find('input.form-checkbox');
 				if ($checkbox.is(':disabled') == false) {
 					if ($parent.hasClass('active') == false) {
 						$parent.addClass('active');
 						$checkbox.prop("checked", true).trigger('change');
-					} else {
+					}
+					else {
 						$parent.removeClass('active');
 						$checkbox.prop("checked", false).trigger('change');
 					}
@@ -165,6 +170,7 @@
 		
 		$forms.off('click', '.ojjeform-radio').on('click', '.ojjeform-radio', function(e) {
 			e.preventDefault();
+			
 			var $link = $(this);
 			var $parent = $link.parent();
 			var $radio = $parent.find('input.form-radio');
@@ -176,7 +182,8 @@
 					$radios.find("input:radio").prop("checked", false);
 					$parent.addClass('active');
 					$parent.find('input.form-radio').prop("checked", true).trigger("change");
-				} else {
+				}
+				else {
 					$parent.find('input.form-radio').prop("checked", false).trigger("change");
 					$parent.removeClass('active');
 				}
@@ -185,6 +192,7 @@
 		
 		$forms.off('click', 'a.ojjeform-select').on('click', 'a.ojjeform-select', function(e) {
 			e.preventDefault();
+			
 			var $link = $(this);
 			var $parentLi = $link.parent();
 			var $parentUl = $parentLi.parent();
@@ -192,6 +200,7 @@
 			var $select = $wrapper.find('select');
 			var $selectedWrapper = $wrapper.find('.ojjeform-select-chosen');
 			var $selectedLink = $selectedWrapper.find('.ojjeform-select-chosen-link');
+			
 			if ($select.is(':disabled') == false) {
 				if ($link.hasClass('open') == false) {
 					var $selectList = $link.parents('ul');
@@ -213,33 +222,94 @@
 
 		$forms.off('click', 'a.ojjeform-select-chosen-link').on('click', 'a.ojjeform-select-chosen-link', function(e) {
 			e.preventDefault();
+			
 			var $link = $(this);
 			var $parent = $link.parent();
 			var $wrapper = $parent.parent();
 			var $select = $wrapper.find('select');
+			var $label = $wrapper.find('label');
 			var $form = $link.closest('form');
+			var $selectList = $wrapper.find('ul.ojjeform-select-list');
+			
+			$('form.ojjeform.open').each(function(k, v) {
+				var $currForm = $(v);
+				var $currLink = $currForm.find('a.ojjeform-select-chosen-link');
+				
+				if ($currForm.is($form) == false) {
+					$currForm.removeClass('open down up');
+					$currForm.find('.form-type-select').removeClass('open');
+					$currForm.find('.ojjeform-select-list').fadeOut(150);
+				}
+			});
+			
 			if ($select.is(':disabled') == false) {
 				$.each($form.find('ul.ojjeform-select-list.open'), function(k, v) {
 					var $list = $(v);
 					var $listParent = $(v).closest('.form-type-select');
 					var $listLink = $listParent.find('.ojjeform-select-chosen-link');
 					$list.slideUp(200, function() {
-						$list.removeClass('open');
-						$listLink.removeClass('open');
+						$wrapper.removeClass('open');
 					});
 				});
 
-				var $selectList = $wrapper.find('ul.ojjeform-select-list');
-				if ($selectList.hasClass('open')) {
-					$selectList.slideUp(200, function(){
-						$selectList.removeClass('open');
-						$link.removeClass('open');
-					});
-				} else {
-					$selectList.slideDown(200, function(){
-						$selectList.addClass('open');
-						$link.addClass('open');
-					});
+				if ($wrapper.hasClass('open')) {
+					var linkHeight = $link.outerHeight();
+					var listHeight = $selectList.outerHeight();
+					var labelHeight = $label.outerHeight();
+					var listHeightTotal = listHeight + linkHeight;
+				}
+				else {
+					$selectList.css({ display: 'block' });
+					var linkHeight = $link.outerHeight();
+					var listHeight = $selectList.outerHeight();
+					var labelHeight = $label.outerHeight();
+					var listHeightTotal = listHeight + linkHeight;
+					$selectList.css({ display: 'none' });
+				}
+				
+				var eTop = $link.offset().top;
+				var windowTop = $(window).scrollTop();
+				var windowHeight = $(window).height();
+				var docHeight = $(document).height();
+				var footerHeight = $('footer').outerHeight();
+				
+				if (eTop + listHeightTotal + footerHeight > windowHeight + windowTop) {
+					var direction = 'up';
+				}
+				else {
+					var direction = 'down';
+				}
+				
+				if ($wrapper.hasClass('open')) {
+					if (direction === 'down') {
+						$selectList.fadeOut(150, function() {
+							$form.removeClass('open down up');
+							$wrapper.removeClass('open');
+						});
+					}
+					else if (direction === 'up') {
+						$selectList.fadeOut(150, function() {
+							$form.removeClass('open down up');
+							$wrapper.removeClass('open');
+						});
+					}
+				}
+				else {
+					if (direction === 'down') {
+						$selectList.css({ top: linkHeight + labelHeight - 1 });
+						$form.addClass('open down');
+						$selectList.fadeIn(150, function() {
+							$wrapper.addClass('open');
+						});
+					}
+					else if (direction === 'up') {
+						$selectList.css({ top: -(listHeight - labelHeight - 1)});
+						$form.addClass('open up');
+						
+						$selectList.fadeIn(150, function() {
+							$wrapper.addClass('open');
+						});
+					}
 				}
 			}
 		});

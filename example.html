@@ -14,27 +14,27 @@
 	
 	<script type="text/javascript">
 	
-	  $(document).ready(function() {
-    
-	    /* VARIABLES */
-	    var $questions_form = $('#questions-form');
-  
-	    /* Style form components with jquery plugin */
-	    if ($questions_form.length > 0) {
-	      var formOptions = {
-	        types: {
-	          checkbox: true,
-	          radio: true,
-	          select: true
-	        }
-	      };
-	      $.ojjeform($questions_form, formOptions);
-	    }  
+		$(document).ready(function() {
+		
+			/* VARIABLES */
+			var $questions_form = $('#questions-form');
+			
+			/* Style form components with jquery plugin */
+			if ($questions_form.length > 0) {
+				var formOptions = {
+					types: {
+						checkbox: true,
+						radio: true,
+						select: true
+					}
+				};
+				$.ojjeform($questions_form, formOptions);
+			}
 		
 		});
 		
 	</script>
-  
+		
 	
 </head>
 
@@ -53,7 +53,7 @@
 			
 					<input type="checkbox" name="vienna" value="vienna">
 					<label for="vienna">Vienna</label>
-          
+					
 					<input type="checkbox" name="moscow"value="moscow">
 					<label for="moscow">Moscow</label>
 
@@ -77,7 +77,7 @@
 
 					<input type="radio" name="moscow" value="moscow">
 					<label for="moscow">Moscow</label>
-          
+					
 				</div>
 
 			</div>
@@ -89,7 +89,7 @@
 			<div class="form-components">
 
 				<div class="form-select">
-            <label for="teams">Team</label>
+						<label for="teams">Team</label>
 						<select class="teams" name="teams">
 							<option value="manchester_united">Manchester United</option>
 							<option value="milan">Milan</option>
@@ -104,14 +104,14 @@
 		</div>
 		
 		<div class="btn-wrapper">
-		  <input class="btn btn-next" type="button" value="Nästa val" style="display: none;">
+			<input class="btn btn-next" type="button" value="Nästa val" style="display: none;">
 			<input class="btn btn-done" type="submit" value="Ok!" style="display: inline-block;">
-  		<a href="#" class="more-form-button">
-        <span class="icon-marker"></span>
-        <span class="icon"></span>
-        <span class="text"></span>
-      </a>
-    </div>
+			<a href="#" class="more-form-button">
+				<span class="icon-marker"></span>
+				<span class="icon"></span>
+				<span class="text"></span>
+			</a>
+		</div>
 
 	</form>
 
