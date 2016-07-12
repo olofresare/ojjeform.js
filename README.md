@@ -21,29 +21,27 @@ Style form compontents with custom graphics without breaking event listeners.
 	
 	<script type="text/javascript">
 	
-	  $(document).ready(function() {
-    
-	    /* VARIABLES */
-	    var $questions_form = $('#questions-form');
-  
-	    /* Style form components with jquery plugin */
-	    if ($questions_form.length > 0) {
-	      var formOptions = {
-	        types: {
-	          checkbox: true,
-	          radio: true,
-	          select: true,
-	          textfield: false,
-	          textarea: false
-	        }
-	      };
-	      $.ojjeform($questions_form, formOptions);
-	    }  
+		$(document).ready(function() {
+		
+			/* VARIABLES */
+			var $questions_form = $('#questions-form');
+			
+			/* Style form components with jquery plugin */
+			if ($questions_form.length > 0) {
+				var formOptions = {
+					types: {
+						checkbox: true,
+						radio: true,
+						select: true
+					}
+				};
+				$.ojjeform($questions_form, formOptions);
+			}
 		
 		});
 		
 	</script>
-  
+	
 	
 </head>
 
@@ -128,27 +126,27 @@ Style form compontents with custom graphics without breaking event listeners.
 		
 		<div class="form-row third">
 			<div class="form-text">
-  			<label for="name">Name</label><br />
-  			<input type="text" class="form-text" name="name" />
-  		</div>
+				<label for="name">Name</label><br />
+				<input type="text" class="form-text" name="name" />
+			</div>
 		</div>
 		
 		<div class="form-row fourth">
 			<div class="form-text">
-  			<label for="message">Message</label><br />
-  			<textarea class="form-textarea" name="message"></textarea>
-  		</div>
+				<label for="message">Message</label><br />
+				<textarea class="form-textarea" name="message"></textarea>
+			</div>
 		</div>
 
 		<div class="btn-wrapper">
-		  <input class="btn btn-next" type="button" value="Nästa val" style="display: none;">
+			<input class="btn btn-next" type="button" value="Nästa val" style="display: none;">
 			<input class="btn btn-done" type="submit" value="Ok!" style="display: inline-block;">
-  		<a href="#" class="more-form-button">
-        <span class="icon-marker"></span>
-        <span class="icon"></span>
-        <span class="text"></span>
-      </a>
-    </div>
+			<a href="#" class="more-form-button">
+				<span class="icon-marker"></span>
+				<span class="icon"></span>
+				<span class="text"></span>
+			</a>
+		</div>
 
 	</form>
 
@@ -162,20 +160,16 @@ var $questions_form = $('#questions-form');
 
 /* Style form components with jquery plugin */
 if ($questions_form.length > 0) {
-  var formOptions = {
-    types: {
-      checkbox: true,
-      radio: true,
-      select: true,
-      textfield: false,
-      textarea: false
-    }
-  };
-  $.ojjeform($questions_form, formOptions);
-}  
+	var formOptions = {
+		types: {
+			checkbox: true,
+			radio: true,
+			select: true
+		}
+	};
+	$.ojjeform($questions_form, formOptions);
+}
 ```
 
 ### Todo
-- Fix support for textfields
-- Fix support for textareas
-- Fix support for submits
+- ???
