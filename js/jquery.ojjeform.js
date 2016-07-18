@@ -194,6 +194,7 @@
 			e.preventDefault();
 			
 			var $link = $(this);
+			var $form = $link.closest('form');
 			var $parentLi = $link.parent();
 			var $parentUl = $parentLi.parent();
 			var $wrapper = $parentUl.parent();
@@ -216,6 +217,7 @@
 						var $optionToChoose = $select.find('option[value="' + chosenVal + '"]');
 						$optionToChoose.prop('selected', true).trigger('change');
 						$wrapper.removeClass('open');
+						$form.removeClass('open up down');
 					});
 				}
 			}
