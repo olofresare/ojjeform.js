@@ -215,6 +215,7 @@
 						$selectedLink.removeClass('open');
 						var $optionToChoose = $select.find('option[value="' + chosenVal + '"]');
 						$optionToChoose.prop('selected', true).trigger('change');
+						$wrapper.removeClass('open');
 					});
 				}
 			}
