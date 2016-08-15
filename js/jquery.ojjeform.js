@@ -322,18 +322,18 @@
 			$form.find('.active').removeClass('active');
 		});
 		
-		$document.off('click').on('click', function() {
-			$('.form-type-select').each(function(k, v) {
-				var $wrapper = $(v);
-				var $selectList = $wrapper.find('ul.ojjeform-select-list');
-				var $link = $wrapper.find('.ojjeform-select-chosen .ojjeform-select-chosen-link');
-				if ($selectList.hasClass('open')) {
-					$selectList.slideUp(200, function() {
-						$selectList.removeClass('open');
-						$link.removeClass('open');
-					});
-				}
-			});
+		$document.off('click').on('click', function(e) {
+			var $target = $(e.target);
+			var $openForms = $('.ojjeform.open');
+			
+			if ($openForms.length > 0 && $target.hasClass('ojjeform-select-chosen-link') === false && $target.hasClass('ojjeform-select') === false) {
+				$openForms.each(function(k, v) {
+					var $v = $(v);
+					$v.removeClass('open down up');
+					$v.find('.form-type-select').removeClass('open');
+					$v.find('.ojjeform-select-list').fadeOut(150);
+				});
+			}
 		});
 		
 	};
