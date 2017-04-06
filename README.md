@@ -33,10 +33,10 @@ Style form compontents with custom graphics without breaking event listeners.
 						checkbox: true,
 						radio: true,
 						select: true
-						},
-						radio: {
-							deselect: true
-						}
+					},
+					radio: {
+						deselect: true
+					}
 				};
 				$.ojjeform($questions_form, formOptions);
 			}
