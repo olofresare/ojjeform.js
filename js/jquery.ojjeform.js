@@ -183,7 +183,7 @@
 					$parent.addClass('active');
 					$parent.find('input.form-radio').prop("checked", true).trigger("change");
 				}
-				else {
+				else if (typeof settings.radio.deselect === undefined || settings.radio.deselect === true) {
 					$parent.find('input.form-radio').prop("checked", false).trigger("change");
 					$parent.removeClass('active');
 				}
