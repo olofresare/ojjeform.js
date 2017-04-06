@@ -168,6 +168,9 @@ if ($questions_form.length > 0) {
 			checkbox: true,
 			radio: true,
 			select: true
+		},
+		radio: {
+			deselect: true
 		}
 	};
 	$.ojjeform($questions_form, formOptions);
