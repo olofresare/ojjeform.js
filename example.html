@@ -25,7 +25,8 @@
 					types: {
 						checkbox: true,
 						radio: true,
-						select: true
+						select: true,
+						multiselect: true
 					},
 					radio: {
 						deselect: true
@@ -57,7 +58,7 @@
 					<input type="checkbox" name="vienna" value="vienna">
 					<label for="vienna">Vienna</label>
 					
-					<input type="checkbox" name="moscow"value="moscow">
+					<input type="checkbox" name="moscow" value="moscow">
 					<label for="moscow">Moscow</label>
 					
 				</div>
@@ -72,10 +73,10 @@
 				
 				<div class="form-radios">
 					
-					<input type="radio" name="hawaii"value="hawaii">
+					<input type="radio" name="hawaii" value="hawaii">
 					<label for="hawaii">Hawaii</label>
 					
-					<input type="radio" name="vienna"  value="vienna">
+					<input type="radio" name="vienna" value="vienna">
 					<label for="vienna">Vienna</label>
 					
 					<input type="radio" name="moscow" value="moscow">
@@ -92,14 +93,50 @@
 			<div class="form-components">
 				
 				<div class="form-select">
-						<label for="teams">Team</label>
-						<select class="teams" name="teams">
+						<label for="soccer-teams">Team</label>
+						<select class="soccer-teams" name="soccer-teams">
 							<option value="manchester_united">Manchester United</option>
 							<option value="milan">Milan</option>
 							<option value="barcelona">Barcelona</option>
 							<option value="dortmund">Dortmund</option>
 						</select>
 						
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="form-row fourth">
+			<h2>4. Favourite hockey team</h2>
+			<div class="form-components">
+				
+				<div class="form-multiselect">
+						<label for="hockey-teams">Team</label>
+						<select class="hockey-teams" name="hockey-teams" id="hockey-teams" data-title="Teams" multiple>
+							<option value="colorado_avalanche">Colorado Avalanche</option>
+							<option value="new_york_rangers">New York Rangers</option>
+							<option value="boston_bruins">Boston Bruins</option>
+							<option value="vancouver_canucks">Vancouver Canucks</option>
+						</select>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="form-row fifth">
+			<h2>5. Favourite basketball team</h2>
+			<div class="form-components">
+				
+				<div class="form-multiselect">
+						<label for="basketball-teams">Team</label>
+						<select class="basketball-teams" name="basketball-teams" id="basketball-teams" data-title="Teams" multiple>
+							<option value="los_angeles_lakers">Los Angeles Lakers</option>
+							<option value="new_york_knicks">New York Knicks</option>
+							<option value="chicago_bulls">Chicago Bulls</option>
+							<option value="boston_celtics">Boston Celtics</option>
+						</select>
 				</div>
 				
 			</div>

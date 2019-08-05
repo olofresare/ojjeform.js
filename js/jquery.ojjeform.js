@@ -44,6 +44,7 @@
 				checkbox: false,
 				radio: false,
 				select: false,
+				multiselect: false,
 				textfield: false
 			}
 		};
@@ -69,20 +70,26 @@
 				$formItems = $formItems.not('[type=radio]');
 			}
 			if (settings.types.select == false) {
-				$formItems = $formItems.not('select');
+				$formItems = $formItems.not('select:not([multiple])');
+			}
+			if (settings.types.multiselect == false) {
+				$formItems = $formItems.not('select[multiple]');
 			}
 			
 			$formItems.each(function(i, o) {
 				var $item = $(o);
 				var tagType = o.tagName.toLowerCase();
+				var multiple = ($item.attr('multiple') === 'multiple') ? true : false;
 				
-				if (tagType == 'select') {
+				if (tagType == 'select' && multiple === false) {
 					$item.addClass('form-select');
+					
 					if ($item.closest('.form-select-wrapper').length > 0) {
 						return;
 					}
 					
 					$item.wrap('<div class="form-type-select cf"></div>');
+					
 					var $parent = $item.parent();
 					var name = $item.prop('name');
 					var $label = $form.find('label[for="' + name + '"]');
@@ -99,7 +106,9 @@
 					
 					$listOptions.each(function(k, opt) {
 						var $optObj = $(opt);
-						optionsArray.push('<li><a class="' + itemType + '" href="#" data-value="' + $optObj.val() + '">' + $optObj.text() + '</a></li>');
+						var select_value = $optObj.val();
+						var select_text = $optObj.text();
+						optionsArray.push('<li><a class="' + itemType + '" href="#" data-value="' + select_value + '">' + select_text + '</a></li>');
 					});
 					
 					var optionString = optionsArray.join('');
@@ -115,6 +124,55 @@
 					$selectList.slideUp(0, function() {
 						$selectList.removeClass('open');
 					});
+				}
+				else if (tagType == 'select' && multiple === true) {
+					$item.addClass('form-multiselect');
+					if ($item.closest('.form-select-wrapper').length > 0) {
+						return;
+					}
+					
+					$item.wrap('<div class="form-type-multiselect cf"></div>');
+					
+					var $parent = $item.parent();
+					var name = $item.prop('name');
+					var $label = $form.find('label[for="' + name + '"]');
+					$label.prependTo($parent);
+					var itemType = 'ojjeform-multiselect';
+					var selectLink = '<div class="multiselect-headline">' + $label.text() + '</a></div>';
+					$parent.append(selectLink);
+					var listClass = itemType + '-list';
+					var selectList = '<ul class="' + listClass + '"></ul>';
+					var select_id = $item.prop('id');
+					$parent.append('<div class="multiselect-content" data-id="' + select_id + '">' + selectList + '</div>');
+					
+					var $content = $parent.find('.multiselect-content');
+					var $selectList = $content.find('ul');
+					
+					var optionsArray = [];
+					var $listOptions = $item.find('option');
+					
+					$listOptions.each(function(k, opt) {
+						var $optObj = $(opt);
+						var select_value = $optObj.val();
+						var select_text = $optObj.text();
+						optionsArray.push('<li><input class="checkbox" type="checkbox" value="' + select_value + '" id="' + name + '-' + select_value + '"><label for="' + name + '-' + select_value + '">' + select_text + '</label></li>');
+					});
+					
+					var optionString = optionsArray.join('');
+					$selectList.append(optionString);
+					
+					$content.append('<a href="#" class="multiselect-close-list">Välj</a>');
+					
+					var selectedValue = $item.find('option:selected').text();
+					var $selectedWrapper = $parent.find('.ojjeform-select-chosen');
+					var $selectedLi = $selectedWrapper.find('.ojjeform-select-chosen-link');
+					if (selectedValue.length > 0) {
+						$selectedLi.text(selectedValue);
+					}
+					
+					// $selectList.slideUp(0, function() {
+// 						$selectList.removeClass('open');
+// 					});
 				}
 				else if (tagType == 'input') {
 					var itemType = $(o).prop('type');
@@ -334,6 +392,69 @@
 					$v.find('.ojjeform-select-list').fadeOut(150);
 				});
 			}
+		});
+		
+		$forms.off('click', '.multiselect-headline').on('click', '.multiselect-headline', function(e) {
+			e.preventDefault();
+			
+			var $headline = $(this);
+			var $filter = $headline.closest('.form-type-multiselect');
+			var deactivated = ($filter.hasClass('deactivated')) ? true : false;
+			
+			if (deactivated === false) {
+				var $list = $filter.find('.multiselect-content');
+				var $all_lists = $('.form-type-multiselect .multiselect-content');
+				
+				if ($list.is(':visible')) {
+					$headline.removeClass('open');
+					$list.fadeOut(300);
+				}
+				else {
+					$all_lists.each(function(k, v) {
+						var $v = $(v);
+						
+						if ($v.data('id') !== $list.data('id')) {
+							$v.removeClass('open');
+							$v.fadeOut(300, function() {
+								
+							});
+						}
+					});
+					
+					$headline.addClass('open');
+					$list.fadeIn(300);
+				}
+			}
+		});
+		
+		$forms.off('click', '.multiselect-close-list').on('click', '.multiselect-close-list', function(e) {
+			e.preventDefault();
+			var multiselect_selected = [];
+			
+			var $link = $(this);
+			var $wrapper = $link.closest('.form-type-multiselect');
+			var $content = $wrapper.find('.multiselect-content');
+			var filter_type = $content.data('id');
+			var $checked_checkboxes = $content.find('input[type="checkbox"]:checked');
+			
+			if ($checked_checkboxes.length > 0) {
+				multiselect_selected[filter_type] = [];
+				
+				$checked_checkboxes.each(function(k, v) {
+					var $v = $(v);
+					var value = $v.val();
+					multiselect_selected[filter_type].push(value);
+				});
+			}
+			else {
+				delete multiselect_selected[filter_type];
+			}
+			
+			console.log(multiselect_selected);
+			
+			$content.fadeOut(300, function() {
+				// search_redirect();
+			});
 		});
 		
 	};
