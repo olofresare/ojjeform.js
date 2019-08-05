@@ -169,10 +169,6 @@
 					if (selectedValue.length > 0) {
 						$selectedLi.text(selectedValue);
 					}
-					
-					// $selectList.slideUp(0, function() {
-// 						$selectList.removeClass('open');
-// 					});
 				}
 				else if (tagType == 'input') {
 					var itemType = $(o).prop('type');
@@ -325,6 +321,8 @@
 					var listHeight = $selectList.outerHeight();
 					var labelHeight = $label.outerHeight();
 					var listHeightTotal = listHeight + linkHeight;
+					console.log(listHeight);
+					console.log(linkHeight);
 					$selectList.css({ display: 'none' });
 				}
 				
@@ -357,14 +355,14 @@
 				}
 				else {
 					if (direction === 'down') {
-						$selectList.css({ top: linkHeight + labelHeight - 1 });
+						$selectList.css({ top: linkHeight - 1 });
 						$form.addClass('open down');
 						$selectList.fadeIn(150, function() {
 							$wrapper.addClass('open');
 						});
 					}
 					else if (direction === 'up') {
-						$selectList.css({ top: -(listHeight - labelHeight - 1)});
+						$selectList.css({ top: -(listHeight - 1)});
 						$form.addClass('open up');
 						
 						$selectList.fadeIn(150, function() {
@@ -384,12 +382,14 @@
 			var $target = $(e.target);
 			var $openForms = $('.ojjeform.open');
 			
-			if ($openForms.length > 0 && $target.hasClass('ojjeform-select-chosen-link') === false && $target.hasClass('ojjeform-select') === false) {
+			if ($openForms.length > 0 && $target.hasClass('ojjeform-select-chosen-link') === false && $target.hasClass('ojjeform-select') === false && $target.hasClass('multiselect-headline') === false) {
 				$openForms.each(function(k, v) {
 					var $v = $(v);
 					$v.removeClass('open down up');
 					$v.find('.form-type-select').removeClass('open');
 					$v.find('.ojjeform-select-list').fadeOut(150);
+					$v.find('.form-type-multiselect').removeClass('open');
+					$v.find('.multiselect-content').fadeOut(150);
 				});
 			}
 		});
@@ -399,6 +399,7 @@
 			
 			var $headline = $(this);
 			var $filter = $headline.closest('.form-type-multiselect');
+			var $form = $headline.closest('.ojjeform');
 			var deactivated = ($filter.hasClass('deactivated')) ? true : false;
 			
 			if (deactivated === false) {
@@ -421,7 +422,8 @@
 						}
 					});
 					
-					$headline.addClass('open');
+					$filter.addClass('open');
+					$form.addClass('open');
 					$list.fadeIn(300);
 				}
 			}
