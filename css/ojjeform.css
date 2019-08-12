@@ -1,49 +1,3 @@
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  -webkit-text-size-adjust: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; 
-}
-
-*, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit; 
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: Arial, Helvetica, Verdana, sans-serif;
-  font-size: 10px;
-  background: #fff;
-  color: #000; 
-}
-
-img {
-  border: none; 
-}
-
-a {
-  outline: 0; 
-}
-
-.cf:before,
-.cf:after {
-  content: " ";
-  display: table; 
-}
-
-.cf:after {
-  clear: both; 
-}
-
 #questions-form {
   padding: 10px; 
 }
@@ -76,15 +30,19 @@ a {
     text-decoration: none;
     background-color: #fff;
     width: 100px;
-    text-indent: 5px;
+    text-indent: 10px;
     display: block;
     height: 19px;
     line-height: 19px;
+    font-size: 1.2rem;
     outline: none; 
 }
 
 .ojjeform .form-type-multiselect {
   position: relative; 
+}
+  .ojjeform .form-type-multiselect.open .select-content {
+    z-index: 100000; 
 }
   .ojjeform .form-type-multiselect > label {
     display: none; 
@@ -97,113 +55,173 @@ a {
     width: 100%;
     cursor: pointer;
     border: 1px solid #e2e2e2;
-    padding: 10px 10px 10px 15px;
+    text-indent: 10px;
+    height: 30px;
+    line-height: 30px;
     position: relative;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 1.2rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none; 
+    user-select: none;
+    position: relative; 
 }
-  .ojjeform .form-type-multiselect .multiselect-content {
+    .ojjeform .form-type-multiselect .multiselect-headline:before {
+      content: "";
+      position: absolute;
+      top: 13px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #A5A5A5;
+      z-index: 2; 
+}
+  .ojjeform .form-type-multiselect .select-content {
     width: 100%;
     position: absolute;
-    top: 37px;
+    top: 29px;
     left: 0px;
     z-index: 1;
     background-color: #fff;
     border: 1px solid #e2e2e2;
-    padding: 10px 10px 10px 10px;
+    padding: 3px;
     display: none; 
 }
-    .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list {
-      padding-left: 0px;
+    .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list {
+      padding: 0px;
       margin: 0px;
-      max-height: 100px;
+      max-height: 120px;
       overflow-y: auto; 
 }
-      .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list::-webkit-scrollbar {
+      .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list::-webkit-scrollbar {
         width: 5px;
         height: 15px; 
 }
-      .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list::-webkit-scrollbar-thumb {
-        background: #404040; 
+      .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list::-webkit-scrollbar-thumb {
+        background: #c5c5c5;
+        -webkit-border-radius: 7px;
+        border-radius: 7px; 
 }
-      .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list::-webkit-scrollbar-track {
-        background: #dddddd; 
+      .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list::-webkit-scrollbar-track {
+        background: #ffffff; 
 }
-      .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list li {
+      .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list li {
         list-style: none;
         cursor: pointer;
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px; 
+        width: 100%; 
 }
-        .ojjeform .form-type-multiselect .multiselect-content .ojjeform-multiselect-list li label {
-          margin-left: 2px;
+        .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list li .checkbox {
+          display: inline-block;
+          height: auto; 
+}
+        .ojjeform .form-type-multiselect .select-content .ojjeform-multiselect-list li label {
+          display: inline-block;
+          margin-left: 4px;
+          font-size: 1.2rem;
+          line-height: 1;
+          cursor: pointer;
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none; 
 }
-    .ojjeform .form-type-multiselect .multiselect-content .multiselect-close-list {
+    .ojjeform .form-type-multiselect .select-content .multiselect-close-list {
       width: 100%;
       display: block;
       float: left;
       background-color: #f63e6f;
       color: #fff;
-      margin-top: 10px;
+      margin-top: 3px;
       padding: 5px 0px 5px 0px;
       text-align: center;
       text-decoration: none; 
 }
 
-.ojjeform .form-type-select .ojjeform-select-chosen {
-  display: inline;
-  float: left;
-  clear: both;
-  width: 100%; 
+.ojjeform .form-type-select {
+  position: relative; 
 }
-
-.ojjeform .form-type-select a {
-  width: 100%;
-  height: 32px;
-  line-height: 31px;
-  color: #000;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; 
+  .ojjeform .form-type-select .select-content {
+    width: 100%;
+    position: absolute;
+    top: 29px;
+    left: 0px;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    padding: 0px 3px 0px 0px;
+    display: none; 
+}
+    .ojjeform .form-type-select .select-content .ojjeform-select-list {
+      padding: 0px 3px 0px 0px;
+      margin: 0px;
+      max-height: 120px;
+      overflow-y: auto; 
+}
+      .ojjeform .form-type-select .select-content .ojjeform-select-list::-webkit-scrollbar {
+        width: 5px;
+        height: 15px; 
+}
+      .ojjeform .form-type-select .select-content .ojjeform-select-list::-webkit-scrollbar-thumb {
+        background: #c5c5c5;
+        -webkit-border-radius: 7px;
+        border-radius: 7px; 
+}
+      .ojjeform .form-type-select .select-content .ojjeform-select-list::-webkit-scrollbar-track {
+        background: #ffffff; 
+}
+  .ojjeform .form-type-select.open .select-content {
+    z-index: 100000; 
+}
+  .ojjeform .form-type-select .ojjeform-select-chosen {
+    display: inline;
+    float: left;
+    clear: both;
+    width: 100%; 
+}
+  .ojjeform .form-type-select a {
+    width: 100%;
+    height: 30px;
+    line-height: 29px;
+    color: #000; 
 }
 
 .ojjeform .ojjeform-select-list {
-  width: 100%;
   padding: 0px;
-  margin: 0px 0px 0px 0px;
-  position: absolute;
-  top: 50px;
-  left: 0px;
-  z-index: 100000;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  -webkit-border-radius: 3px;
-  border-radius: 3px; 
+  margin: 0px;
+  max-height: 120px;
+  overflow-y: auto; 
+}
+  .ojjeform .ojjeform-select-list::-webkit-scrollbar {
+    width: 5px;
+    height: 15px; 
+}
+  .ojjeform .ojjeform-select-list::-webkit-scrollbar-thumb {
+    background: #c5c5c5;
+    -webkit-border-radius: 7px;
+    border-radius: 7px; 
+}
+  .ojjeform .ojjeform-select-list::-webkit-scrollbar-track {
+    background: #ffffff; 
 }
   .ojjeform .ojjeform-select-list li {
     margin: 0px;
     padding: 0px;
     list-style: none; 
 }
+    .ojjeform .ojjeform-select-list li a:hover {
+      background-color: #e5e5e5; 
+}
 
 .ojjeform .ojjeform-select-chosen-link {
   position: relative;
   width: 100%;
-  border-top: 1px solid #e5e5e5;
-  border-right: none;
-  border-bottom: 1px solid #e5e5e5;
-  border-left: 1px solid #e5e5e5;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  border-top: 1px solid #E5E5E5;
+  border-right: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  border-left: 1px solid #E5E5E5;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -212,26 +230,14 @@ a {
   .ojjeform .ojjeform-select-chosen-link:before {
     content: "";
     position: absolute;
-    top: 12px;
-    right: 7px;
+    top: 13px;
+    right: 10px;
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #fff;
-    z-index: 200001; 
-}
-  .ojjeform .ojjeform-select-chosen-link:after {
-    content: "";
-    position: absolute;
-    top: -1px;
-    right: 0px;
-    width: 31px;
-    height: 32px;
-    background-color: #3d3d3d;
-    z-index: 200000;
-    -webkit-border-radius: 3px;
-    border-radius: 3px; 
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #A5A5A5;
+    z-index: 2; 
 }
 
 .ojjeform .form-type-checkbox .ojjeform-checkbox,
@@ -281,7 +287,7 @@ a {
   .ojjeform .multiple-rows .radio-group .radio-group-label {
     display: block;
     float: left;
-    font-size: 20px;
+    font-size: 2rem;
     margin-bottom: 10px; 
 }
   .ojjeform .multiple-rows .radio-group .form-type-radio {
@@ -294,53 +300,58 @@ a {
 .ojjeform .form-type-checkbox .ojjeform-checkbox .icon {
   display: block;
   float: left;
-  width: 17px;
-  height: 17px;
-  border: 1px solid #999;
-  background-color: #eee;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e2e2e2;
+  background-color: #fff;
   position: relative;
-  cursor: pointer;
-  -webkit-border-radius: 4px;
-  border-radius: 4px; 
+  cursor: pointer; 
 }
   .ojjeform .form-type-checkbox .ojjeform-checkbox .icon:after {
     content: "";
     position: absolute;
     top: 0px;
-    left: -2px;
-    width: 17px;
-    height: 17px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
     pointer-events: none; 
 }
 
 .ojjeform .form-type-checkbox .ojjeform-checkbox .text {
   float: left;
   display: block;
-  font-size: 18px;
-  margin-top: 0px;
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-top: 3px;
   margin-left: 5px;
   color: #000;
-  cursor: pointer; 
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
 }
 
-.ojjeform .form-type-checkbox.active .ojjeform-checkbox .icon:after {
-  background: url("../images/checkbox.png") transparent no-repeat 2px 1px; 
+.ojjeform .form-type-checkbox.active .ojjeform-checkbox .icon {
+  border: 1px solid #71B747; 
+}
+  .ojjeform .form-type-checkbox.active .ojjeform-checkbox .icon:after {
+    background: url("../img/ojjeform-checkbox.png") transparent no-repeat;
+    background-size: cover; 
 }
 
 .ojjeform .form-type-radio .ojjeform-radio .icon {
   display: block;
   float: left;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #999;
-  background-color: #eee;
-  -webkit-border-radius: 18px;
-  border-radius: 18px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e2e2e2;
+  background-color: #fff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
   position: relative;
   top: 0px;
   left: 0px;
-  -webkit-box-shadow: inset 0 0 1px 1px #cccccc;
-  box-shadow: inset 0 0 1px 1px #cccccc;
   cursor: pointer; 
 }
   .ojjeform .form-type-radio .ojjeform-radio .icon:after {
@@ -348,28 +359,32 @@ a {
     position: absolute;
     top: 3px;
     left: 3px;
-    width: 10px;
-    height: 10px;
-    z-index: 5000;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    width: 12px;
+    height: 12px;
+    z-index: 2;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
     pointer-events: none; 
 }
 
 .ojjeform .form-type-radio .ojjeform-radio .text {
   display: block;
   float: left;
-  margin-top: 0px;
-  padding: 0px 0px 0px 10px;
-  font-size: 18px;
+  margin-top: 3px;
+  margin-left: 5px;
+  font-size: 1.2rem;
   color: #000;
   text-align: left;
-  line-height: 22px;
-  cursor: pointer; 
+  line-height: 1;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
 }
 
 .ojjeform .form-type-radio.active .ojjeform-radio .icon:after {
-  background-color: #3d3d3d; 
+  background-color: #71B747; 
 }
 
 .ojjeform .form-type-radio.active .ojjeform-radio .text {
@@ -388,4 +403,7 @@ a {
   margin-top: 20px;
   float: left;
   clear: both; 
+}
+  .ojjeform .btn-wrapper .btn {
+    display: inline-block; 
 }
