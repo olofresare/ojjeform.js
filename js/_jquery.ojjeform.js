@@ -1,4 +1,4 @@
-;(function($) {
+(function($) {
 	"use strict";
 	
 	$.ojjeform = function($forms, options) {
@@ -156,37 +156,13 @@
 						var select_value = $optObj.val();
 						var select_text = $optObj.text();
 						var is_selected = $optObj.prop('selected');
-						var is_disabled = $optObj.prop('disabled');
-						var is_closed = $optObj.hasClass('closed');
-						var is_group = $optObj.hasClass('group');
-						var is_new = $optObj.data('new');
-						is_new = (is_new) ? true : false;
 						
-						var input_attributes = '';
-						var li_markup = '';
-						var li_classes = '';
-						var li_attributes = '';
-						var suffix_markup = '';
-						
-						if (is_group) {
-							li_classes += 'group';
-						}
-						if (is_closed) {
-							li_classes += 'closed';
-						}
-						if (is_disabled) {
-							li_classes += ' disabled';
-						}
 						if (is_selected) {
-							input_attributes += ' checked="checked" ';
+							optionsArray.push('<li><input checked="checked" class="checkbox" type="checkbox" value="' + select_value + '" name="' + name + '[]"><label for="' + name + '-' + select_value + '">' + select_text + '</label></li>');
 						}
-						if (is_new) {
-							suffix_markup += '<span class="new"></span>';
+						else {
+							optionsArray.push('<li><input class="checkbox" type="checkbox" value="' + select_value + '" name="' + name + '[]"><label for="' + name + '-' + select_value + '">' + select_text + '</label></li>');
 						}
-						
-						li_markup = '<li' + li_attributes + ' class="' + li_classes + '"><input ' + input_attributes + ' class="checkbox" type="checkbox" value="' + select_value + '" name="' + name + '[]"><label for="' + name + '-' + select_value + '">' + select_text + '</label>' + suffix_markup + '</li>';
-						
-						optionsArray.push(li_markup);
 					});
 					
 					var optionString = optionsArray.join('');
@@ -485,16 +461,6 @@
 			}
 		});
 		
-		$forms.off('click', '.ojjeform-multiselect-list li input[type="checkbox"]').on('click', '.ojjeform-multiselect-list li input[type="checkbox"]', function(e) {
-			var $checkbox = $(this);
-			var $li = $checkbox.closest('li');
-			var disabled = ($li.hasClass('closed') || $li.hasClass('group')) ? true : false;
-			
-			if (disabled) {
-				return false;
-			}
-		});
-		
 		$forms.off('click', '.ojjeform-multiselect-list li label').on('click', '.ojjeform-multiselect-list li label', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -502,11 +468,6 @@
 			var $label = $(this);
 			var $li = $label.closest('li');
 			var $checkbox = $li.find('.checkbox');
-			var disabled = ($li.hasClass('closed') || $li.hasClass('group')) ? true : false;
-			
-			if (disabled) {
-				return false;
-			}
 			
 			if ($checkbox.prop('checked') === true) {
 				$checkbox.prop('checked', false);
@@ -524,11 +485,6 @@
 				
 				var $li = $(this);
 				var $checkbox = $li.find('.checkbox');
-				var disabled = ($li.hasClass('closed') || $li.hasClass('group')) ? true : false;
-				
-				if (disabled) {
-					return false;
-				}
 			
 				if ($checkbox.prop('checked') === true) {
 					$checkbox.prop('checked', false);
